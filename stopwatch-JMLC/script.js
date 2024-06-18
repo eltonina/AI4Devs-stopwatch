@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     clearButton.addEventListener('click', clearTimer);
   
     function startTimer() {
-      if (mode === 'countdown' && (startButton.innerText === 'Start' || startButton.innerText === 'Clear')) {
+      if (mode === 'countdown' && (startButton.innerText === 'Start' || startButton.innerText === 'Continue')) {
         let hours = parseInt(prompt("Enter hours:", "0"), 10);
         let minutes = parseInt(prompt("Enter minutes:", "0"), 10);
         let seconds = parseInt(prompt("Enter seconds:", "0"), 10);
@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
       let hours = Math.floor(elapsedTime / 3600000);
       let minutes = Math.floor((elapsedTime % 3600000) / 60000);
       let seconds = Math.floor((elapsedTime % 60000) / 1000);
-      let milliseconds = Math.floor((elapsedTime % 1000) / 10); // Correcting milliseconds calculation
+      let milliseconds = elapsedTime % 1000; // Correcting milliseconds calculation
   
       timerDisplay.innerText = `${pad(hours)}:${pad(minutes)}:${pad(seconds)}.${pad(milliseconds, 3)}`;
     }
