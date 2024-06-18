@@ -66,3 +66,11 @@ Tenemos que corregir 2 cosas aún:
 - El formato de milisegundos sigue estando mal, Ahora se muestran y decrementan los 2 últimos dígitos. Pero debe ser con 3 dígitos. El espacio es para 999 milisegundos. Por tanto la cuenta atrás empieza en 999 al haber decrementado el segundo.
 - El mensaje de "Time's up" se muestra con el contador "00:00:00.001" o "00:00:00.002"
 ```
+
+# Prompt 6: Fixes
+```
+Seguimos teniendo 2 errores parecidos:
+- En el formato de los milisegundos solo se mueven los dos primeros dígitos, tanto en el cronómetro como en la cuenta atrás. En el cronómetro debe incrementarse de 0 a 999 en pasos de 1 milisegundo: 1, 2, 3, ..., 998, 999. En la cuenta atrás debe decrementarse de 999 a 0 en pasos de 1 milisegundo: 999, 998, 997, ..., 3, 2, 1, 0
+- Seguimos mostrando el mensaje "Time's up" antes de actualizar el display
+```
+

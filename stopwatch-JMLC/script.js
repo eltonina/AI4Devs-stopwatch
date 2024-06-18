@@ -42,18 +42,20 @@ document.addEventListener('DOMContentLoaded', (event) => {
       startButton.innerText = 'Stop';
       interval = setInterval(() => {
         if (mode === 'timer') {
-          elapsedTime += 10;
+          elapsedTime += 1;
         } else if (mode === 'countdown') {
-          elapsedTime -= 10;
+          elapsedTime -= 1;
           if (elapsedTime <= 0) {
             clearInterval(interval);
-            alert("Time's up!");
             elapsedTime = 0;
+            updateDisplay();
+            alert("Time's up!");
             startButton.innerText = 'Start';
+            return;
           }
         }
         updateDisplay();
-      }, 10);
+      }, 1);
     }
   
     function stopTimer() {
