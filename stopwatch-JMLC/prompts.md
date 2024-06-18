@@ -82,3 +82,33 @@ Parece que el código encargado de procesar y mostrar los milisegundos y se ejec
 ```
 
 > Ahora ha identificado el problema y cambia la solución para mostrar correctamente los ms
+
+# Prompts 8, 9 y 10: Testing
+```
+Muy bien, ahora nos falta el testing. Como experto en QA, qué soluciones tenemos para implementar un test del código realizado? 
+Se debería enfocar como Acceptance testing (HTML+JS) aunque también se puede describir pruebas unitarias de la parte Javascript.
+En ambos casos debe utilizar el código realizado y los test no se deben ejecutar en producción ni alterar su código.
+```
+
+> La ejecución de `run test:unit` falla y se intentan corregir:
+```
+Falla el test unitario:
+
+test
+mocha tests/unit.test.js
+
+Exception during run: Error [ERR_REQUIRE_ESM]: require() of ES Module
+```
+
+> Los test fallan
+```
+Todos los test fallan porque no encuentra las funciones.
+Por ejemplo:
+
+Timer and Countdown Unit Tests
+should correctly update display:
+TypeError: updateDisplay is not a function
+```
+
+> Los test siguen fallando y no hay manera de solucionarlo.
+> Además se ha vuelto a romper el "Pause" que ya se había solucionado pasos antes.

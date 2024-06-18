@@ -98,4 +98,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
   function pad(number, length = 2) {
     return number.toString().padStart(length, '0');
   }
+
+  // Exposing functions and variables for testing
+  window.updateDisplay = updateDisplay;
+  window.startTimer = startTimer;
+  window.stopTimer = stopTimer;
+  window.clearTimer = clearTimer;
+  window.elapsedTime = elapsedTime;
+  window.mode = mode;
 });
