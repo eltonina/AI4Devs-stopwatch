@@ -74,3 +74,11 @@ Seguimos teniendo 2 errores parecidos:
 - Seguimos mostrando el mensaje "Time's up" antes de actualizar el display
 ```
 
+# Prompt 7: Final Fix
+```
+Aún no está bien: 
+- El contador de milisegundos tarda 10 segundos en llegar a 999 e incrementar el la parte de segundos. 
+Parece que el código encargado de procesar y mostrar los milisegundos y se ejecuta cada milisegundo tarda más de 1 milisegundo. ¿Que soluciones propones?
+```
+
+> Ahora ha identificado el problema y cambia la solución para mostrar correctamente los ms
