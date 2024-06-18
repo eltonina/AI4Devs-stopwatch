@@ -112,3 +112,10 @@ TypeError: updateDisplay is not a function
 
 > Los test siguen fallando y no hay manera de solucionarlo.
 > Además se ha vuelto a romper el "Pause" que ya se había solucionado pasos antes.
+
+# Prompt 11: Fix de un bug ya solucionado
+```
+Se ha vuelto a romper el botón "Pause" y "Continue" de la cuenta atrás.
+Cuando se pulsa el botón "Start" debe mostrarse la opción "Pause", que para la cuenta atrás. Cuando se pulsa "Pause" debe mostrarse "Continue" para seguir con la cuenta atrás.
+Cuando finaliza la cuenta atrás, se debe mostrar el botón "Start" para empezar otra cuenta atrás.
+```

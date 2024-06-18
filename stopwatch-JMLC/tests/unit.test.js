@@ -5,7 +5,7 @@ import path from 'path';
 
 const __dirname = path.resolve();
 
-const html = fs.readFileSync(path.resolve(__dirname, '../index.html'), 'utf8');
+const html = fs.readFileSync(path.resolve(__dirname, 'index.html'), 'utf8');
 
 describe('Timer and Countdown Unit Tests', () => {
   let window;
@@ -34,7 +34,7 @@ describe('Timer and Countdown Unit Tests', () => {
     window.startTimer();
 
     setTimeout(() => {
-      window.stopTimer();
+      window.pauseTimer();
       expect(window.elapsedTime).to.be.closeTo(1000, 50);
       done();
     }, 1000);
@@ -46,7 +46,7 @@ describe('Timer and Countdown Unit Tests', () => {
     window.startTimer();
 
     setTimeout(() => {
-      window.stopTimer();
+      window.pauseTimer();
       expect(window.elapsedTime).to.be.closeTo(4000, 50);
       done();
     }, 1000);

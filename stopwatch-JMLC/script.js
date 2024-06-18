@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     if (startButton.innerText === 'Start' || startButton.innerText === 'Continue') {
       startTimer();
     } else {
-      stopTimer();
+      pauseTimer();
     }
   });
 
@@ -34,36 +34,35 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
   function startTimer() {
     if (mode === 'countdown' && (startButton.innerText === 'Start' || startButton.innerText === 'Continue')) {
-      const hours = parseInt(prompt("Enter hours:", "0"), 10) || 0;
-      const minutes = parseInt(prompt("Enter minutes:", "0"), 10) || 0;
-      const seconds = parseInt(prompt("Enter seconds:", "0"), 10) || 0;
-      countdownTime = (hours * MS_IN_HOUR + minutes * MS_IN_MINUTE + seconds * MS_IN_SECOND);
-      if (countdownTime <= 0) {
-        alert("Please enter a valid time.");
-        return;
+      if (startButton.innerText === 'Start') {
+        const hours = parseInt(prompt("Enter hours:", "0"), 10) || 0;
+        const minutes = parseInt(prompt("Enter minutes:", "0"), 10) || 0;
+        const seconds = parseInt(prompt("Enter seconds:", "0"), 10) || 0;
+        countdownTime = (hours * MS_IN_HOUR + minutes * MS_IN_MINUTE + seconds * MS_IN_SECOND);
+        if (countdownTime <= 0) {
+          alert("Please enter a valid time.");
+          return;
+        }
+        elapsedTime = countdownTime;
       }
-      elapsedTime = countdownTime;
     }
 
     startTime = performance.now();
     previousTime = startTime;
-    startButton.innerText = 'Stop';
+    startButton.innerText = 'Pause';
     interval = requestAnimationFrame(updateTime);
   }
 
-  function stopTimer() {
+  function pauseTimer() {
     cancelAnimationFrame(interval);
-    if (mode === 'countdown' && elapsedTime > 0) {
-      startButton.innerText = 'Continue';
-    } else {
-      startButton.innerText = 'Start';
-    }
+    startButton.innerText = 'Continue';
   }
 
   function clearTimer() {
-    stopTimer();
+    cancelAnimationFrame(interval);
     elapsedTime = 0;
     updateDisplay();
+    startButton.innerText = 'Start';
   }
 
   function updateTime(currentTime) {
@@ -102,7 +101,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
   // Exposing functions and variables for testing
   window.updateDisplay = updateDisplay;
   window.startTimer = startTimer;
-  window.stopTimer = stopTimer;
+  window.pauseTimer = pauseTimer;
   window.clearTimer = clearTimer;
   window.elapsedTime = elapsedTime;
   window.mode = mode;
