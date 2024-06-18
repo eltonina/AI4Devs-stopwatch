@@ -22,3 +22,120 @@ Además proporcionamos un HTML y CSS base:
 - Se debe incluir tests de aceptación con alguna librería como Jest. Un ejemplo de test sería la introducción de 00:00:01 y comprobar que tras un segundo marca 00:00:00 y se ha lanzado la alerta de tiempo finalizado.
 - Se debe seguir buenas prácticas como SOLID y separar lo que afecta a la IU de lo que es lógica de aplicación
 
+
+# Prompt 2: Ejecución de tests con Jest
+
+Cómo puedo ejecutar el test timer.test.js?
+
+￼
+## Prompt 2.1
+Cuando lanzo los test con el comando npm test se produce el siguiente error:
+
+stopwatch-jmlc@1.0.0 test
+jest
+
+● Validation Error:
+
+Test environment jest-environment-jsdom cannot be found. Make sure the testEnvironment configuration option points to an existing node module.
+
+Configuration Documentation:
+https://jestjs.io/docs/configuration
+
+As of Jest 28 "jest-environment-jsdom" is no longer shipped by default, make sure to install it separately.
+
+
+## Prompt 2.2
+Tras instalar la dependencia con `npm install --save-dev jest-environment-jsdom` se produce este error:
+
+
+> stopwatch-jmlc@1.0.0 test
+> jest
+
+ FAIL  ./timer.test.js
+  ● Test suite failed to run
+
+    TypeError: Cannot read properties of undefined (reading 'testEnvironmentOptions')
+
+      at new JSDOMEnvironment (node_modules/jest-environment-jsdom/build/index.js:66:28)
+      at async TestScheduler.scheduleTests (node_modules/@jest/core/build/TestScheduler.js:333:13)
+      at async runJest (node_modules/@jest/core/build/runJest.js:404:19)
+      at async _run10000 (node_modules/@jest/core/build/cli/index.js:320:7)
+      at async runCLI (node_modules/@jest/core/build/cli/index.js:173:3)
+
+Test Suites: 1 failed, 1 total
+Tests:       0 total
+Snapshots:   0 total
+Time:        0.289 s
+Ran all test suites.
+
+## Prompt 2.3
+Ahora el test se ejecuta pero falla:
+
+> stopwatch-jmlc@1.0.0 test
+> jest
+
+ FAIL  ./timer.test.js
+  ✕ should countdown from 00:00:01 to 00:00:00 and show alert (14 ms)
+
+  ● should countdown from 00:00:01 to 00:00:00 and show alert
+
+    TypeError: Cannot read properties of null (reading 'value')
+
+      10 |
+      11 | function parseTimeInput() {
+    > 12 |     let timeParts = timeInput.value.split(':');
+         |                               ^
+      13 |     return {
+      14 |         hours: parseInt(timeParts[0]),
+      15 |         minutes: parseInt(timeParts[1]),
+
+      at value (script.js:12:31)
+      at parseTimeInput (script.js:22:53)
+      at Object.startTimer (timer.test.js:22:5)
+
+Test Suites: 1 failed, 1 total
+Tests:       1 failed, 1 total
+Snapshots:   0 total
+Time:        0.683 s
+Ran all test suites.
+
+
+## Prompt 2.4
+Parece que ahora encuentra ese campo "value" pero falla lo siguiente:
+
+> stopwatch-jmlc@1.0.0 test
+> jest
+
+ FAIL  ./timer.test.js
+  ✕ should countdown from 00:00:01 to 00:00:00 and show alert (27 ms)
+
+  ● should countdown from 00:00:01 to 00:00:00 and show alert
+
+    expect(jest.fn()).toHaveBeenCalledWith(...expected)
+
+    Expected: "Time is up!"
+
+    Number of calls: 0
+
+      27 |     // Comprobar el valor del input y que se haya mostrado la alerta
+      28 |     expect(document.getElementById('timeInput').value).toBe('00:00:00:000');
+    > 29 |     expect(window.alert).toHaveBeenCalledWith('Time is up!');
+         |                          ^
+      30 | });
+      31 |
+
+      at Object.toHaveBeenCalledWith (timer.test.js:29:26)
+
+Test Suites: 1 failed, 1 total
+Tests:       1 failed, 1 total
+Snapshots:   0 total
+Time:        0.681 s, estimated 1 s
+Ran all test suites.
+
+## Prompt 2.5
+
+Creo que el problema está en que no podemos verificar que se llame a la función window.alert
+Puedes cambiar este comportamiento para que en vez de mostrar el mensaje en un alert lo muestre en un párrafo debajo de los botones?
+
+## Prompt 2.6
+El problema parece ser en el uso de jest.advanceTimersByTime(1000). Debería lanzarse cada 10 milisegundos hasta llegar a 0
