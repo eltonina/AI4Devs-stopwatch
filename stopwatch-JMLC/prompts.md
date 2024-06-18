@@ -41,10 +41,28 @@ Si se selecciona la cuenta atrás debe preguntarse por el tiempo en alertas dond
 ## Comentarios
 > Todo parece correcto
 
-# Prompt 3 
+# Prompt 3: Coding
+```
 De acuerdo, procedamos con la codificación
+```
 
 ## Comentarios
 > El cronómetro funciona correctamente.
 > La cuenta atrás no, cuando se para no deja continuar si no que vuelve a pedir el tiempo para la cuenta atrás.
 > El formateo no es del todo correcto en los milisegundos, puesto que solo decrementa el último dígito de los 3
+
+
+# Prompt 4: Fixes
+```
+Antes de seguir con los test debemos corregir dos cosas:
+- El cronómetro funciona correctamente.
+- La cuenta atrás no: cuando se para no debe mostrar el botón "Start" si no un botón "Continue" para seguir con la cuenta atrás.
+- El formateo no es del todo correcto en los milisegundos, puesto que solo decrementa el último dígito de los 3
+```
+
+# Prompt 5: Fixes
+```
+Tenemos que corregir 2 cosas aún:
+- El formato de milisegundos sigue estando mal, Ahora se muestran y decrementan los 2 últimos dígitos. Pero debe ser con 3 dígitos. El espacio es para 999 milisegundos. Por tanto la cuenta atrás empieza en 999 al haber decrementado el segundo.
+- El mensaje de "Time's up" se muestra con el contador "00:00:00.001" o "00:00:00.002"
+```

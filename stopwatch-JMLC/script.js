@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     });
   
     startButton.addEventListener('click', () => {
-      if (startButton.innerText === 'Start') {
+      if (startButton.innerText === 'Start' || startButton.innerText === 'Continue') {
         startTimer();
       } else {
         stopTimer();
@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     clearButton.addEventListener('click', clearTimer);
   
     function startTimer() {
-      if (mode === 'countdown') {
+      if (mode === 'countdown' && (startButton.innerText === 'Start' || startButton.innerText === 'Clear')) {
         let hours = parseInt(prompt("Enter hours:", "0"), 10);
         let minutes = parseInt(prompt("Enter minutes:", "0"), 10);
         let seconds = parseInt(prompt("Enter seconds:", "0"), 10);
@@ -42,9 +42,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
       startButton.innerText = 'Stop';
       interval = setInterval(() => {
         if (mode === 'timer') {
-          elapsedTime += 100;
+          elapsedTime += 10;
         } else if (mode === 'countdown') {
-          elapsedTime -= 100;
+          elapsedTime -= 10;
           if (elapsedTime <= 0) {
             clearInterval(interval);
             alert("Time's up!");
@@ -53,12 +53,16 @@ document.addEventListener('DOMContentLoaded', (event) => {
           }
         }
         updateDisplay();
-      }, 100);
+      }, 10);
     }
   
     function stopTimer() {
       clearInterval(interval);
-      startButton.innerText = 'Start';
+      if (mode === 'countdown' && elapsedTime > 0) {
+        startButton.innerText = 'Continue';
+      } else {
+        startButton.innerText = 'Start';
+      }
     }
   
     function clearTimer() {
@@ -71,7 +75,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
       let hours = Math.floor(elapsedTime / 3600000);
       let minutes = Math.floor((elapsedTime % 3600000) / 60000);
       let seconds = Math.floor((elapsedTime % 60000) / 1000);
-      let milliseconds = Math.floor((elapsedTime % 1000) / 100);
+      let milliseconds = Math.floor((elapsedTime % 1000) / 10); // Correcting milliseconds calculation
   
       timerDisplay.innerText = `${pad(hours)}:${pad(minutes)}:${pad(seconds)}.${pad(milliseconds, 3)}`;
     }
