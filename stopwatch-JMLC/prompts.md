@@ -43,3 +43,8 @@ Si se selecciona la cuenta atrás debe preguntarse por el tiempo en alertas dond
 
 # Prompt 3 
 De acuerdo, procedamos con la codificación
+
+## Comentarios
+> El cronómetro funciona correctamente.
+> La cuenta atrás no, cuando se para no deja continuar si no que vuelve a pedir el tiempo para la cuenta atrás.
+> El formateo no es del todo correcto en los milisegundos, puesto que solo decrementa el último dígito de los 3
