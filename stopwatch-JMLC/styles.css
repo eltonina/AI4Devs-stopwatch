@@ -1,0 +1,39 @@
+#timer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#timeInput {
+    font-size: 48px;
+    width: 300px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+button {
+    width: 100px;
+    height: 50px;
+    font-size: 20px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#startButton {
+    background-color: green;
+    color: white;
+}
+
+#stopButton {
+    background-color: orange;
+    color: white;
+}
+
+#clearButton {
+    background-color: red;
+    color: white;
+}
+
