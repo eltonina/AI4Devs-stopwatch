@@ -139,3 +139,28 @@ Puedes cambiar este comportamiento para que en vez de mostrar el mensaje en un a
 
 ## Prompt 2.6
 El problema parece ser en el uso de jest.advanceTimersByTime(1000). Debería lanzarse cada 10 milisegundos hasta llegar a 0
+
+
+# Prompt 3
+
+Otro problema es que el input está deshabilitado. Debería poder editarse por el usuario como hemos dicho al principio:
+- Valor predefinido de 5 segundos: 00:00:05.000
+- Cuando el usuario escriba, debe formatearse automáticamente el input para que no tenga que poner los separadores ":"
+
+## Prompt 3.1
+
+Hay un error: Cuando se escribe un dígito en el input el cursor se mueve al final, por lo que no se puede seguir escribiendo.
+
+## Prompt 3.2
+
+El comportamiento no es del todo correcto. 
+El contador inicia con 00:00:05:000 cuando debería mostrarse 00:00:05.000 Es decir, el separador entre segundos y milisegundos es un "."
+Además, al escribir en una posición el cursor se desplaza dos posiciones y escribe 2 veces el dígito tecleado. Por ejemplo, si tenemos el cursor antes del último dígito de la hora y pulsamos 1, el resultado es: 00:01:00:500 cuando debería ser 00:01:05.000
+Si, partiendo de 00:00:05.000 queremos cambiar el dígito 5, situamos el cursor delante y pulsamos un 9, el resultado es 00:00:08:500 cuando debería ser 00:00:08.000
+Puedes generar tests que cubran estos casos y corregir la funcionalidad?
+
+
+
+# Impresiones
+- Ha sido muy complicado que genere un código que funcione como esperaba
+- Los test también han sido difíciles de conseguir ejecutar correctamente. Además, ha caído dos veces en el mismo error: Usar un `document.getElementById('timeInput')` antes que el DOM esté cargado.

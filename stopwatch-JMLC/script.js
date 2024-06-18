@@ -1,12 +1,12 @@
 let timer;
 
 function formatTime(hours, minutes, seconds, milliseconds) {
-    return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}:${String(milliseconds).padStart(3, '0')}`;
+    return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}.${String(milliseconds).padStart(3, '0')}`;
 }
 
 function parseTimeInput() {
     let timeInput = document.getElementById('timeInput');
-    let timeParts = timeInput.value.split(':');
+    let timeParts = timeInput.value.split(/[:.]/);
     return {
         hours: parseInt(timeParts[0], 10),
         minutes: parseInt(timeParts[1], 10),
@@ -67,8 +67,41 @@ function clearTimer() {
     stopTimer();
     let timeInput = document.getElementById('timeInput');
     let message = document.getElementById('message');
-    timeInput.value = '00:08:00:000';
+    timeInput.value = '00:00:05.000';
     message.textContent = ''; // Clear any previous messages
 }
 
-module.exports = { startTimer, stopTimer, clearTimer, formatTime, parseTimeInput };
+function handleTimeInput(event) {
+    let input = event.target;
+    let value = input.value.replace(/[^0-9]/g, '');
+    if (value.length > 8) value = value.slice(0, 8);
+
+    let hours = value.slice(0, 2).padEnd(2, '0');
+    let minutes = value.slice(2, 4).padEnd(2, '0');
+    let seconds = value.slice(4, 6).padEnd(2, '0');
+    let milliseconds = value.slice(6, 9).padEnd(3, '0');
+
+    let formattedValue = `${hours}:${minutes}:${seconds}.${milliseconds}`;
+    
+    let cursorPosition = input.selectionStart;
+    input.value = formattedValue;
+
+    // Adjust the cursor position to be after the last digit typed
+    if (cursorPosition <= 2) {
+        cursorPosition += 0; // No shift
+    } else if (cursorPosition <= 4) {
+        cursorPosition += 1; // Skip the first colon
+    } else if (cursorPosition <= 6) {
+        cursorPosition += 2; // Skip the first and second colons
+    } else if (cursorPosition <= 9) {
+        cursorPosition += 3; // Skip the first, second colons and part of milliseconds
+    }
+
+    input.selectionStart = input.selectionEnd = cursorPosition;
+}
+
+function setupInputHandler() {
+    document.getElementById('timeInput').addEventListener('input', handleTimeInput);
+}
+
+module.exports = { startTimer, stopTimer, clearTimer, formatTime, parseTimeInput, setupInputHandler };
