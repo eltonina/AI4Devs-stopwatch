@@ -1,6 +1,7 @@
 body {
     font-family: Arial, sans-serif;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
@@ -13,29 +14,56 @@ body {
     background: white;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border: 2px solid black;
+    margin-bottom: 20px;
 }
 
 #time-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#main-time {
+    font-size: 5em;
+    font-weight: bold;
+    color: black;
+}
+
+#milliseconds {
     font-size: 2em;
-    margin-bottom: 20px;
+    font-weight: bold;
+    color: black;
+    margin-top: -10px;
+}
+
+#buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
 }
 
 button {
     font-size: 1em;
+    font-weight: bold;
     padding: 10px 20px;
-    margin: 5px;
-    border: none;
+    border: 2px solid black;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s;
 }
 
-#start-stop-button {
+.blue-button {
+    background-color: #007bff;
+    color: black;
+}
+
+.green-button {
     background-color: #28a745;
-    color: white;
+    color: black;
 }
 
-#clear-button {
+.red-button {
     background-color: #dc3545;
-    color: white;
+    color: black;
 }
